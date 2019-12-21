@@ -2,7 +2,9 @@ import pandas as pd
 import numpy as np
 
 
-df=pd.read_csv("dati/dati_row.csv",sep=";")
+df=pd.read_csv("dati/df_fai.csv",sep=",")
+
+
 
 df.columns=[i.lower() for i in df.columns]
 df.columns=[i if "/" not in i else i.replace("/","-") for i in df.columns]
@@ -12,7 +14,18 @@ df.columns=[i if "%" not in i else i.replace("%","perc") for i in df.columns]
 df_comuni=pd.read_csv("dati/dati_comuni.csv",sep=";")
 df_comuni.columns=[i.lower() for i in df_comuni.columns]
 df["delegazione"]=[i.replace("_"," " ) for i in df["delegazione"].values]
-df
+
+def make_df():
+    df=pd.read_csv("dati/df_fai.csv",sep=",")
+
+
+
+    df.columns=[i.lower() for i in df.columns]
+    df.columns=[i if "/" not in i else i.replace("/","-") for i in df.columns]
+    df.columns=[i if "€" not in i else i.replace("€","eur") for i in df.columns]
+    df.columns=[i if "%" not in i else i.replace("%","perc") for i in df.columns]
+
+    return df
 
 
 def cd(luogo,dict):
