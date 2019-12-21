@@ -47,7 +47,9 @@ df_megalopoli.iloc[:20]
 np.unique(df["anno"].to_numpy())
 
 
-def migliori(df_local):
+def migliori(df_local,folder):
+    %matplotlib agg
+    plt.ioff()
     dividendi=["tot_entrate","totale_n+r","ctb_visitatori"]
     targets=["luoghi_aperti","visitatori","abitanti","densità","reddito medio"]
     periodi=["GFP","GFA"]
@@ -57,15 +59,26 @@ def migliori(df_local):
                 for anno in np.unique(df_local["anno"].to_numpy()):
                     df_primavera=df_local[df_local["tipo"]==periodo]
                     df_primavera=df_primavera[df_primavera["anno"]==anno]
-                    df_primavera["target"]=df_primavera[dividendo]/df_primavera[target]
+                    df_primavera["target"]=df_primavera[dividendo].astype(float)/df_primavera[target]
                     df_primavera.sort_values(by="target",ascending=False,inplace=True)
                     df_primavera=df_primavera.iloc[:20]
                     plt.bar((df_primavera['delegazione'].values).astype(str),df_primavera["target"])
                     plt.title(target+"  "+str(anno)+"  "+periodo)
                     plt.xticks(rotation='vertical')
                     plt.gcf().subplots_adjust(bottom=0.50)
-                    plt.savefig("plots/"+dividendo+"/"+dividendo+"-"+target+" "+str(anno)+" "+periodo+".png")
+                    plt.savefig("plots/"+folder+"/"+dividendo+"/"+dividendo+"-"+target+" "+str(anno)+" "+periodo+".png")
                     plt.show()
 
 
-migliori(df_piccoli)
+migliori(df_piccoli,"piccoli")
+migliori(df_medi,"medi")
+migliori(df_grandi,"grandi")
+migliori(df_enormi,"enormi")
+migliori(df_megalopoli,"megalopoli")
+
+
+for i in df_piccoli["ctb_visitatori"]:
+    print(i)
+
+df_piccoli["ctb_visitatori"]/df_piccoli["luoghi_aperti"]
+df_piccoli["ctb_visitatori"].astype(float)
