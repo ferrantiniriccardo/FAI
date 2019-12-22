@@ -1,0 +1,41 @@
+dividere per coorti abitanti
+
+totale entrate su:  -volontari
+                    -luoghi aperti
+                    -visitatori (non affidaile)
+                    -abitanti
+                    -densità
+                    -reddito medio
+                    -rapporto volontari/visitatori (calcolando il numero di visitatori in base alla divisione del totale entrate per il contributo medio)
+                    
+totale iscrizioni (n+r) su:      -volontari
+                                 -luoghi aperti
+                                 -visitatori (non affidaile)
+                                 -abitanti
+                                 -densità
+                                 -reddito medio
+                                 -rapporto volontari/visitatori (calcolando il numero di visitatori in base alla divisione del totale entrate per il contributo medio)
+                                 
+totale CTB_Visitatori su:  -volontari
+                           -luoghi aperti
+                           -visitatori (non affidaile)
+                           -abitanti
+                           -densità
+                           -reddito medio
+                           -rapporto volontari/visitatori (calcolando il numero di visitatori in base alla divisione del totale entrate per il contributo medio)                 
+                           
+andamento regioni per anno                                 
+
+trend nei vari anni del migliore di ogni regione (possibile?)
+
+totale entratu su: risultato anno precedente
+
+
+'anno', 'tipo', 'regione', 'delegazione', 'abitanti', 'km2', 'densità',
+       'reddito medio', 'luoghi_aperti', 'visitatori', 'volontari',
+       'iscritti_nuovi', 'euro_nuovi', 'iscritti_rinnovi', 'euro_rinnovi',
+       'totale_n+r', 'perc iscritti - visitatori', 'amico_fai',
+       'euro_amico_fai', 'totale_euro_n+r+amici', 'euro - volontari',
+       'ctb_pubblici', 'ctb_privati', 'ctb_visitatori', 'tot_entrate',
+       'contributo medio - visitatori', 'unnamed: 26',
+       'raccolta media - visitatori', 'tot_uscite'
