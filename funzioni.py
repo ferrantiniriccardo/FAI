@@ -16,3 +16,18 @@ def cerca_delegazione(luogo,df):
                 if df["delegazione"].values[i] not in trovate:
                     trovate.append(df["delegazione"].values[i])
     return trovate
+
+
+
+def set_colors(df_local, th):
+    th=np.array(th)
+    th=np.insert(th,0,0)
+
+    cols=["black","green","yellow","red","blue","gray"]
+    colors=[]
+    for i in range(df_local.shape[0]):
+        j=0
+        while j<len(th) and df_local.iloc[i]["abitanti"]>th[j]:
+            j+=1
+        colors.append(cols[j-1])
+    return colors

@@ -107,7 +107,7 @@ df.columns
 
 lista_df=[df_piccoli,df_medi, df_grandi,df_enormi,df_megalopoli]
 
-def assoluti(item,denominatore,lista_df,df):
+def assoluti(item,lista_df,df):
     try:
         os.mkdir("../plots/torte valori assoluti")
     except OSError:
@@ -276,4 +276,3 @@ def migliori_2(df_local_in,df_title,best,threshold=0,save=False):
 labels=["piccoli","medi","grandi", "enormi", "magalopoli"]
 for i in range(len(lista_df)):
     migliori_2(lista_df[i],labels[i],20)
-    
