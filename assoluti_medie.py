@@ -33,7 +33,7 @@ def assoluti_medie(item,lista_df,labels,df,save=False):
 lista_df=[little,middle_1,middle_2,middle_3,big,huge]
 labels=["piccoli","medi 1","medi 2","medi 3","grandi", "metropoli"]
 assoluti_medie("tot_entrate",lista_df,labels,df,save=True)
-assoluti_medie("totale_n+r",lista_df,labels,df)
+assoluti_medie("totale_n+r",lista_df,labels,df,save=True)
 
 lista_df=[little,middle,big,huge]
 labels=["piccoli","medi","grandi", "metropoli"]
@@ -77,7 +77,7 @@ tot_pop_medie("totale_n+r",lista_df,labels,df)
 
 lista_df=[little,middle,big,huge]
 labels=["piccoli","medi","grandi", "metropoli"]
-tot_pop_medie("tot_entrate",lista_df,labels,df)
+tot_pop_medie("tot_entrate",lista_df,labels,df,save=True)
 tot_pop_medie("totale_n+r",lista_df,labels,df)
 
 
@@ -112,7 +112,7 @@ def tot_delegazioni_medie(item,lista_df,labels,df,primavera_autunno=True,save=Fa
     del_perc=[]
     plt.title(item+" delegazioni ")
     if save==True:
-        plt.savefig("../plots/"+str(item)+" delegazioni medie/"+item+" confrontato con num delegazioni  ")
+        plt.savefig("../plots/"+str(item)+" delegazoni medie/"+item+" confrontato con num delegazioni.png")
     plt.show()
 
 
@@ -123,5 +123,5 @@ tot_delegazioni_medie("totale_n+r",lista_df,labels,df)
 
 lista_df=[little,middle,big,huge]
 labels=["piccoli","medi","grandi", "metropoli"]
-tot_delegazioni_medie("tot_entrate",lista_df,labels,df)
+tot_delegazioni_medie("tot_entrate",lista_df,labels,df,save=True)
 tot_delegazioni_medie("totale_n+r",lista_df,labels,df)

@@ -6,6 +6,9 @@ import os
 import funzioni as fun
 
 
+mlt.rcParams["figure.figsize"]=(20,10)
+mlt.rcParams["font.size"]=20
+
 
 def bins_labels(bins, **kwargs):
     bin_w = (max(bins) - min(bins)) / (len(bins) - 1)

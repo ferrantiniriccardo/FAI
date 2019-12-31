@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mlt
+from scipy import stats
 import os
 
 
@@ -31,3 +32,29 @@ def set_colors(df_local, th):
             j+=1
         colors.append(cols[j-1])
     return colors
+
+
+def make_df_training():
+    df=pd.read_csv("dati/df_fai.csv", sep=",")
+    df.columns=[i.lower() for i in df.columns]
+    df.columns=[i if "/" not in i else i.replace("/","-") for i in df.columns]
+    df.columns=[i if "€" not in i else i.replace("€","eur") for i in df.columns]
+    df.columns=[i if "%" not in i else i.replace("%","perc") for i in df.columns]
+
+
+    delegazioni=np.unique(df["delegazione"])
+    delegazioni=delegazioni[delegazioni!="Delegazione Roma"]
+
+    df_test=df[df["delegazione"]=="Delegazione Roma"]
+
+
+    for deleg in delegazioni:
+        df_aux=df[df["delegazione"]==deleg]
+        value,cardinality=stats.mode(df_aux["abitanti"])
+        if cardinality[0]>2:
+            df_test=df_test.append(df_aux[df_aux["abitanti"]==value[0]])
+
+
+            #df_test=df_test[df_test["abitanti"]<1250000]
+
+    return df_test
