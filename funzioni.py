@@ -24,14 +24,25 @@ def set_colors(df_local, th):
     th=np.array(th)
     th=np.insert(th,0,0)
 
-    cols=["black","green","yellow","red","blue","gray"]
-    colors=[]
-    for i in range(df_local.shape[0]):
-        j=0
-        while j<len(th) and df_local.iloc[i]["abitanti"]>th[j]:
-            j+=1
-        colors.append(cols[j-1])
-    return colors
+    colors=np.array([])
+
+    if len(th)==6:
+        color_list=np.array(["deepskyblue","#f5b303","orange","darkorange","g","fuchsia"])
+        labels=["piccoli","medi 1","medi 2","medi 3", "grandi", "metropoli"]
+        for i in range(df_local.shape[0]):
+            j=0
+            while j<len(th) and df_local.iloc[i]["abitanti"]>th[j]:
+                j+=1
+            colors=np.append(colors,color_list[j-1])
+    else:
+        color_list=np.array(["deepskyblue","orange","g","fuchsia"])
+        labels=["piccoli","medi", "grandi", "metropoli"]
+        for i in range(df_local.shape[0]):
+            j=0
+            while j<len(th) and df_local.iloc[i]["abitanti"]>th[j]:
+                j+=1
+            colors=np.append(colors,color_list[j-1])
+    return colors,color_list,labels
 
 
 def make_df_training():
