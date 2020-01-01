@@ -30,7 +30,8 @@ def ranking_gruppi_media(item,k,n,lista_df,labels,df,save=False):
     sort_index=np.argsort(efficienza)
     efficienza=np.sort(efficienza)
     labels_sorted=[labels[sort_index[i]] for i in range(len(labels))]
-    plt.bar(labels_sorted,efficienza,color=colors)
+    colors_sorted=[colors[sort_index[i]] for i in range(len(labels))]
+    plt.bar(labels_sorted,efficienza,color=colors_sorted)
 
     plt.title(item+" ranking gruppi media")
     if save==True:
@@ -53,3 +54,31 @@ lista_df=[little,middle,big,huge]
 labels=["piccoli","medi","grandi", "metropoli"]
 ranking_gruppi_media("tot_entrate",k,n,lista_df,labels,df)
 ranking_gruppi_media("totale_n+r",lista_df,labels,df)
+
+fun.cerca_delegazione("genova",df)
+
+l=fun.cerca_delegazione("deleg",df)
+
+l=np.unique(df["delegazione"])
+
+len(l)
+
+
+
+for i in l:
+    if i[-1]==" ":
+        new = list(i)
+        new[-1] = ''
+        i=''.join(new)
+        print(i)
+
+for i in l:
+    if i[-1]==" ":
+        print(i)
+l=np.unique(l)
+for i in l:
+    print(i)
+
+
+p=df[df["anno"]==2019]
+sum(p[p["tipo"]=="GFA"]["abitanti"])

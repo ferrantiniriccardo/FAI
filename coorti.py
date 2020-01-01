@@ -6,8 +6,8 @@ import os
 import funzioni as fun
 
 
-mlt.rcParams["figure.figsize"]=(20,10)
-mlt.rcParams["font.size"]=20
+mlt.rcParams["figure.figsize"]=(40,20)
+mlt.rcParams["font.size"]=40
 
 
 def bins_labels(bins, **kwargs):
@@ -18,7 +18,7 @@ def bins_labels(bins, **kwargs):
 
 
 
-def make_all_df():
+def make_all_df(save=False):
 
     df=pd.read_csv("dati/df_fai.csv", sep=",")
     df.columns=[i.lower() for i in df.columns]
@@ -26,14 +26,18 @@ def make_all_df():
     df.columns=[i if "€" not in i else i.replace("€","eur") for i in df.columns]
     df.columns=[i if "%" not in i else i.replace("%","perc") for i in df.columns]
 
+    if save==True:
+        try:
+            os.mkdir("../plots/divisione coorti")
+        except OSError:
+            pass
+
 
 
     df_abitanti=df.copy(deep=True)
 
     df_abitanti=df_abitanti.sort_values(by="abitanti",ascending=False)
     df_abitanti=df_abitanti[df_abitanti["anno"]==2019]
-    mlt.rcParams["figure.figsize"]=(20,10)
-    mlt.rcParams["font.size"]=20
 
 
 
@@ -53,8 +57,11 @@ def make_all_df():
     outliers_limit=bins[11]
     plt.title("Scelta soglia per coorte Huge")
     plt.plot([outliers_limit,outliers_limit],[0,max(n)],color="red",linewidth=2)
-    plt.show()
 
+
+    if save==True:
+        plt.savefig("../plots/divisione coorti/metropoli.png")
+    plt.show()
     thresholds.append(outliers_limit)
 
 
@@ -72,6 +79,8 @@ def make_all_df():
     middle_limit=bins[3]
     plt.title("Scelta soglia per coorte big(destra della linea)")
     plt.plot([middle_limit,middle_limit],[0,max(n)],color="red",linewidth=2)
+    if save==True:
+        plt.savefig("../plots/divisione coorti/grandi.png")
     plt.show()
     thresholds.append(middle_limit)
 
@@ -91,6 +100,8 @@ def make_all_df():
     little_limit=bins[1]
     plt.title("Scrematura little")
     plt.plot([little_limit,little_limit],[0,max(n)],color="red",linewidth=2)
+    if save==True:
+        plt.savefig("../plots/divisione coorti/piccole (medie).png")
     plt.show()
 
     #si vede che le zone piccole hanno una rappresentanza maggiore e le si separano
@@ -110,6 +121,8 @@ def make_all_df():
     plt.title("Scelta soglie per sottoclassi di middle")
     plt.plot([bins[3],bins[3]],[0,max(n)],color="red",linewidth=2)
     plt.plot([bins[6],bins[6]],[0,max(n)],color="red",linewidth=2)
+    if save==True:
+        plt.savefig("../plots/divisione coorti/sottoclassi medie.png")
     plt.show()
 
     thresholds_short=np.array(sorted(thresholds))
@@ -124,7 +137,7 @@ def make_all_df():
     little=df_abitanti[df_abitanti["abitanti"]<little_limit]
 
 
-    middle=df[df["abitanti"]<middle_limit]
+
 
     # composozione finale dei df
     # manca da specificare la popolazione  associata
@@ -194,8 +207,8 @@ def make_all_df():
     # little
     little=df[df["abitanti"]<little_limit]
 
-
-
+    middle=df[df["abitanti"]<middle_limit]
+    middle=middle[middle["abitanti"]>=little_limit]
 
     # composozione finale dei df
     # manca da specificare la popolazione  associata
@@ -224,3 +237,9 @@ def make_all_df():
 
 
     return df,little,middle_1,middle_2,middle_3,middle,big,huge, all_no_little,thresholds,thresholds_short
+
+df,little,middle_1,middle_2,middle_3,middle,big,huge,all_no_little,thresholds,thresholds_short=make_all_df(True)
+
+
+middle.shape[0]+little.shape[0]+big.shape[0]+huge.shape[0]
+df.shape[0]
